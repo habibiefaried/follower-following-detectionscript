@@ -1,0 +1,23 @@
+name: "Detection Job"
+
+on: 
+  workflow_dispatch:
+    inputs:
+      igid:
+        description: 'Instagram ID to be inspected (must public profile)'     
+        required: true
+        default: 'warning'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.8' 
+          architecture: 'x64'
+      - run: |
+          pip3 install -r requirements.txt
+          python3 main.py "${{ secrets.IG_USER }}" "${{ secrets.IG_PASSWORD }}" "${{ github.event.inputs.igid }}"
+
