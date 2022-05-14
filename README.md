@@ -10,3 +10,11 @@ To detect two things:
 pip3 install -r requirements.txt
 python3 main.py <your IG username> <your IG password> <Instagram ID>
 ```
+
+# Get the IG ID
+
+```
+https://www.instagram.com/web/search/topsearch/?query=<your username>
+```
+
+Look for `pk` json field
