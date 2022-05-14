@@ -6,7 +6,7 @@ on:
       igid:
         description: 'Instagram ID to be inspected (must public profile)'     
         required: true
-        default: 'warning'
+        default: '0'
 
 jobs:
   build:

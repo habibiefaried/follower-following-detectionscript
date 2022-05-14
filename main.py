@@ -4,6 +4,10 @@ import os
 import time
 import sys
 
+if (sys.argv[3] == '0'):
+    print("Input is wrong, aborting...")
+    sys.exit(0)
+
 start_time = time.time()
 cl = Client()
 cl.login(sys.argv[1], sys.argv[2])
