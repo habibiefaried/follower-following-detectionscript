@@ -4,12 +4,19 @@ import os
 import time
 import sys
 
+def change_password_handler(username):
+    # Simple way to generate a random string
+    chars = list("abcdefghijklmnopqrstuvwxyz1234567890!&£@#")
+    password = "".join(random.sample(chars, 8))
+    return password
+
 if (sys.argv[3] == '0'):
     print("Input is wrong, aborting...")
     sys.exit(0)
 
 start_time = time.time()
 cl = Client()
+cl.change_password_handler = change_password_handler
 cl.login(sys.argv[1], sys.argv[2])
 
 followers = cl.user_followers(int(sys.argv[3]))
