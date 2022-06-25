@@ -1,14 +1,34 @@
-from instagrapi import Client
-from instagrapi.types import User
+#!/usr/bin/python3
 import os
 import time
 import sys
+import random
+
+from instagrapi import Client
+from instagrapi.types import User
+from instagrapi.mixins.challenge import ChallengeChoice
+
+
+def get_code_from_anywhere(username):
+    while True:
+        code = input(f"Enter code (6 digits) for {username}: ").strip()
+        if code and code.isdigit():
+            return code
+    return None
 
 def change_password_handler(username):
     # Simple way to generate a random string
     chars = list("abcdefghijklmnopqrstuvwxyz1234567890!&£@#")
     password = "".join(random.sample(chars, 8))
+    print("Your new password is: "+password)
     return password
+
+def challenge_code_handler(username, choice):
+    if choice == ChallengeChoice.SMS:
+        return get_code_from_anywhere(username)
+    elif choice == ChallengeChoice.EMAIL:
+        return get_code_from_anywhere(username)
+    return False
 
 if (sys.argv[3] == '0'):
     print("Input is wrong, aborting...")
@@ -16,6 +36,7 @@ if (sys.argv[3] == '0'):
 
 start_time = time.time()
 cl = Client()
+cl.challenge_code_handler = challenge_code_handler
 cl.change_password_handler = change_password_handler
 cl.login(sys.argv[1], sys.argv[2])
 
