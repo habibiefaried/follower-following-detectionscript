@@ -35,14 +35,14 @@ if (sys.argv[3] == '0'):
     sys.exit(0)
 
 if (len(sys.argv) != 5):
-    print("Usage: ./main.py <username> <password> <target> <2fa code>
+    print("Usage: ./main.py <username> <password> <target> <2fa code>")
     sys.exit(0)
 
 start_time = time.time()
 cl = Client()
 cl.challenge_code_handler = challenge_code_handler
 cl.change_password_handler = change_password_handler
-cl.login(sys.argv[1], sys.argv[2], sys.argv[4])
+cl.login(username=sys.argv[1], password=sys.argv[2], verification_code=sys.argv[4])
 
 followers = cl.user_followers(int(sys.argv[3]))
 following = cl.user_following(int(sys.argv[3]))
